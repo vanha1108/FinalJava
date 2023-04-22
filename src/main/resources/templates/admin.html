@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Page</title>
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header ul {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            list-style: none;
+        }
+
+        .header li {
+            margin-left: 20px;
+        }
+
+        .header a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Navigation Styles */
+        nav {
+            background-color: #555;
+            color: #fff;
+            padding: 20px;
+        }
+
+        nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        nav li {
+            margin-bottom: 10px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Content Styles */
+        .content {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th {
+            background-color: #555;
+            color: #fff;
+            padding: 10px;
+            text-align: left;
+        }
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Customer Styles */
+        .customer-form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="email"], select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* Product Styles */
+        .product-form {
+            margin-top: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            font-size: 14px;
+            height: 100px;
+        }
+        /* Order Styles */
+        .order-form {
+            margin-top: 20px;
+        }
+
+        .order-table {
+            margin-top: 20px;
+        }
+
+        .order-table th {
+            background-color: #555;
+            color: #fff;
+            padding: 10px;
+            text-align: left;
+            width: 20%;
+        }
+
+        .order-table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            width: 20%;
+        }
+
+        .order-table td:first-child {
+            width: 10%;
+        }
+
+        .order-table td:last-child {
+            width: 40%;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <main class="content">
+        <section id="product">
+            <h2>Products List</h2>
+            <form class="product-form">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name">
+
+                <label for="description">Description</label>
+                <textarea id="description" name="description"></textarea>
+
+                <label for="price">Price</label>
+                <input type="text" id="price" name="price">
+
+                <button type="submit">Save Product</button>
+            </form>
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product : ${productList}">
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.category}"></td>
+                    <td th:text="${product.price}"></td>
+                    <td th:text="${product.description}"></td>
+                    <td><a th:href="@{/product/{id}(id=${product.id})}" class="btn btn-primary btn-sm rounded-0">Chi tiết</a></td>
+                    <td><a th:href="@{/product/edit/{id}(id=${product.getId()})}" class="btn btn-warning btn-sm rounded-0">Chỉnh sửa</a></td>
+                    <td><a th:href="@{/product/delete/{id}(id=${product.getId()})}" class="btn btn-danger btn-sm rounded-0">Xóa</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</div>
+</body>
+</html>

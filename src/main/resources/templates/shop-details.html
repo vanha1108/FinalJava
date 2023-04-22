@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chi tiết sản phẩm</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.25rem;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+
+        #product-name {
+            font-weight: bold;
+        }
+
+        #add-to-cart-btn {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1.25rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container my-4">
+    <h1 class="text-center mb-4">Thông tin sản phẩm</h1>
+    <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <form th:action="@{/add-to-cart/{pId}(pId=${product.id})}" method="post">
+                            <h5 class="card-title">Tên sản phẩm: <span id="product-name"
+                                                                       th:text="${product.name}"></span>
+                            </h5>
+                            <p class="card-text">Giá: <span id="product-price" th:text="${product.price}"></span></p>
+                            <p class="card-text">Loại sản phẩm: <span id="product-brand"
+                                                                      th:text="${product.category}"></span></p>
+                            <p class="card-text">Mô tả: <span id="product-description"
+                                                              th:text="${product.description}"></span></p>
+                            <!--                            <input type="hidden" id="productId" th:text="${product.id}"/>-->
+                            <button id="add-to-cart-btn" class="btn btn-primary">Thêm vào giỏ hàng</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        x
+    </div>
+</div>
+<!--<script type="text/javascript">-->
+<!--    document.getElementById("add-to-cart-btn").addEventListener("click", function () {-->
+<!--        var productId = $("productId").val();-->
+<!--        console.log("XXX: " + productId);-->
+<!--        window.location.href = "/add-to-cart/" + productId;-->
+<!--    });-->
+<!--</script>-->
+</body>
+</html>
